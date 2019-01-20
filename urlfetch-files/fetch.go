@@ -26,5 +26,6 @@ func main() {
 		} else {
 			fmt.Printf("\nHTTP status code: %v\n%d bytes", resp.Status, w)
 		}
+		resp.Body.Close()
 	}
 }
