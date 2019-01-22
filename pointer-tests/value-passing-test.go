@@ -1,21 +1,22 @@
-// test the output of two functions that take in different values
+// test the side effect of two functions that take in different values
 package main
 
 import "fmt"
 
-var x, y int = 1, 2
+var x int = 1
 
 func adder(numb *int) {
 	*numb++
 }
 
-func adder2(numb int) int {
+func adder2(numb int) {
 	numb++
-	return numb
 }
 
 func main() {
+	fmt.Printf("Orig x value: %d\n", x)
 	adder(&x)
-	fmt.Println(x)
-	fmt.Println(adder2(x))
+	fmt.Printf("x value after adder: %d\n", x)
+	adder2(x)
+	fmt.Printf("x value after adder2: %d\n", x)
 }
