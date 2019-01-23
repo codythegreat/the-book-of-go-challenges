@@ -10,5 +10,8 @@ import (
 
 func main() {
 	c := tempconv.Celsius(100)
+	k := tempconv.Kelvin(0)
 	fmt.Println(c.String())
+	fmt.Println(k.String())
+	fmt.Println(tempconv.KToC(k).String())
 }
