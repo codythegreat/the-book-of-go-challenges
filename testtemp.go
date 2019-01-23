@@ -14,4 +14,5 @@ func main() {
 	fmt.Println(c.String())
 	fmt.Println(k.String())
 	fmt.Println(tempconv.KToC(k).String())
+	fmt.Printf("Look at this cold temperature: %v\n", tempconv.AbsoluteZeroC)
 }
