@@ -25,10 +25,11 @@ func WaitForServer(url string) error {
 }
 
 func main() {
-	url := "http://www.codymaxie.com"
+	log.SetPrefix("wait: ")
+	log.SetFlags(0)
+	url := "https://www.codymaxie.com/link-doesn't-exist"
 	if err := WaitForServer(url); err != nil {
 		log.Fatalf("Site is down: %v\n", err)
-	} else {
-		fmt.Println("site was available")
 	}
+	fmt.Println("site was available")
 }
