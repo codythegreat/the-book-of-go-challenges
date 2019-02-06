@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	nodeString := `<div id='container'><h1 style='margin: 0; color: red;' class='header'>Hello</h1><p>World</p></div>`
+	nodeString := `<div id='container'><h1 style='margin: 0; color: red;' class='header'>Hello</h1><img src='#' id='image'></img><p>World</p></div>`
 	htmlprettyprinter.Print(nodeString)
 }

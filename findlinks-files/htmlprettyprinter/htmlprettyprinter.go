@@ -22,22 +22,22 @@ func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
 
 func pre(node *html.Node) {
 	if node.Type == html.ElementNode {
-		if node.FirstChild == nil {
+		if node.Data == "img" {
 			fmt.Printf("%*s<%s/>\n", depth*2, "", node.Data)
 		} else {
 			fmt.Printf("%*s<%s>\n", depth*2, "", node.Data)
 		}
-		for _, attr := range node.Attr {
-			fmt.Printf("%*s%s: %s\n", 1+depth*2, "", attr.Key, attr.Val)
-		}
 		depth++
+	}
+	for _, attr := range node.Attr {
+		fmt.Printf("%*s%s: %s\n", depth*2-1, "", attr.Key, attr.Val)
 	}
 }
 
 func post(node *html.Node) {
 	if node.Type == html.ElementNode {
 		depth--
-		if node.FirstChild != nil {
+		if node.Data != "img" {
 			fmt.Printf("%*s</%s>\n", depth*2, "", node.Data)
 		}
 	}
