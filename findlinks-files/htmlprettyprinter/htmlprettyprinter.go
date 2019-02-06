@@ -13,22 +13,23 @@ import (
 var depth int
 
 func forEachNode(n *html.Node, pre, post func(n *html.Node)) {
-	if pre != nil {
-		pre(n)
-	}
-
+	pre(n)
 	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		forEachNode(c, pre, post)
 	}
-
-	if post != nil {
-		post(n)
-	}
+	post(n)
 }
 
 func pre(node *html.Node) {
 	if node.Type == html.ElementNode {
-		fmt.Printf("%*s<%s>\n", depth*2, "", node.Data)
+		if node.FirstChild == nil {
+			fmt.Printf("%*s<%s/>\n", depth*2, "", node.Data)
+		} else {
+			fmt.Printf("%*s<%s>\n", depth*2, "", node.Data)
+		}
+		for _, attr := range node.Attr {
+			fmt.Printf("%*s%s: %s\n", 1+depth*2, "", attr.Key, attr.Val)
+		}
 		depth++
 	}
 }
@@ -36,7 +37,9 @@ func pre(node *html.Node) {
 func post(node *html.Node) {
 	if node.Type == html.ElementNode {
 		depth--
-		fmt.Printf("%*s</%s>\n", depth*2, "", node.Data)
+		if node.FirstChild != nil {
+			fmt.Printf("%*s</%s>\n", depth*2, "", node.Data)
+		}
 	}
 }
 
